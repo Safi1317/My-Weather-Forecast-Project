@@ -5,44 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>Weather Forcast</title>
   </head>
   <body>
-    <div id="">
-      <input id="search" class="inputvalue" type="text" placeholder=" City name" />
-      <button id="searchbtn" class="searchbtn">Search</button>
-    </div>
+    <center>
+      <div id="searchwrapper">
+        <input
+          id="search"
+          class="inputvalue"
+          type="text"
+          placeholder=" City name"
+        />
+        <button id="searchbtn" class="searchbtn">Search</button>
+      </div>
+    </center>
     <div id="weathercontainer">
-      <div id="forcastcontainer">
+      <div class="hide" id="forcastcontainer">
+        <!-- <div id="dayscontainer" class="">
+          <p class="weather" id="day1"></p>
+          <p>Temperature:<span id="temperature"></span></p>
+          <p>Humidity:<span id="humidity"></span></p>
+          <p>Wind:<span id="wind"></span></p>
+        </div>
+        <div id="dayscontainer" class="">
+          <p class="weather" id="day2"></p>
+          <p>Temperature:<span id="temperature"></span></p>
+          <p>Humidity:<span id="humidity"></span></p>
+          <p>Wind:<span id="wind"></span></p>
+        </div>
+        <div id="dayscontainer" class="">
+          <p class="weather" id="day3"></p>
+          <p>Temperature:<span id="temperature"></span></p>
+          <p>Humidity:<span id="humidity"></span></p>
+          <p>Wind:<span id="wind"></span></p>
+        </div>
         <div id="dayscontainer" class="">
           <p class="weather" id="day1"></p>
-          <p class="temperature" id="temperature">Temperature</p>
-          <p class="wind" id="wind">Wind</p>
-          <p class="humidity" id="humidity">Humidity</p>
-           <div id="dayscontainer">
-            <p id="cityName"></p2>
-            <p class="weather" id="day2"></p>
-            <p class="temperature" id="temperature">Temperature</p>
-            <p class="wind" id="wind">Wind</p>
-            <p class="Humidity" id="humidity">Humidity</p>
-            <div id="dayscontainer">
-                <p class="weather" id="day3"></p>
-                <p class="temperature" id="temperature">Temperature</p>
-                <p class="wind" id="wind">Wind</p>
-                <p class="Humidity" id="humidity">Humidity</p> 
-                <!-- <div id="dayscontainer">
-                    <p class="weather" id="day4"></p>
-                    <p class="temperature" id="temperature">Temperature</p>
-                    <p class="wind" id="wind">Wind</p>
-                    <p class="Humidity" id="humidity">Humidity</p>
-                    <div id="dayscontainer">
-                        <p class="weather" id="day5"></p>
-                        <p class="temperature" id="temperature">Temperature</p>
-                        <p class="wind" id="wind">Wind</p>
-                        <p class="Humidity" id="humidity">Humidity</p>  -->
+          <p>Temperature:<span id="temperature"></span></p>
+          <p>Humidity:<span id="humidity"></span></p>
+          <p>Wind:<span id="wind"></span></p>
+        </div>
+        <div id="dayscontainer" class="">
+          <p class="weather" id="day1"></p>
+          <p>Temperature:<span id="temperature"></span></p>
+          <p>Humidity:<span id="humidity"></span></p>
+          <p>Wind:<span id="wind"></span></p>
         </div> -->
       </div>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="./script.js"></script>
 </html>
