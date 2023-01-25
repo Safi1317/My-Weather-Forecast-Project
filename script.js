@@ -25,6 +25,8 @@ function searchWeather() {
       console.log(data);
       let lat = data[0].lat;
       let lon = data[0].lon;
+      cityName.textContent = data[0]["name"] + " , " + data[0]["country"];
+      console.log(cityName);
       console.log(lat);
       console.log(lon);
       fetch(
@@ -34,19 +36,26 @@ function searchWeather() {
         .then((data) => {
           console.log(data);
           removeChilds(container);
-          for (i = 0; i < 5; i++) {
+          for (i = 0; i < 6; i++) {
             let cards = document.createElement("div");
             cards.className = "qwert";
-            cards.firstChild.className = "today";
+            const d = dayjs();
+            const today = data["daily"][i];
+            console.log(today);
+            let dayofweek = document.createElement("h2");
+            dayofweek.textContent = d.today;
+            // document.createElement("h2");
+
             let p1 = document.createElement("p");
             let p2 = document.createElement("p");
             let p3 = document.createElement("p");
             let p4 = document.createElement("p");
-            let h2 = document.createElement("h2");
 
-            const d = dayjs();
+            // const d = dayjs();
+            // const today = data["daily"][i] ["dt"];
+            // h2.textContent = d.today.format("MM/DD/YYYY");
+            // // h2.textContent = d.format("MM/DD/YYYY");
 
-            h2.textContent = d.format("MM/DD/YYYY");
             p1.textContent = "Temp: " + data["daily"][i]["temp"]["day"] + "° F";
             p2.textContent = "Wind: " + data["daily"][i]["wind_speed"] + "MPH";
             p3.textContent = "Humidity: " + data["daily"][i]["humidity"] + "%";
@@ -54,13 +63,19 @@ function searchWeather() {
             var image = document.createElement("img");
             image.src = iconUrl;
             cards.appendChild(image);
-            cards.appendChild(h2);
+            // cards.appendChild(h2);
             cards.appendChild(p1);
             cards.appendChild(p2);
             cards.appendChild(p3);
             cards.appendChild(p4);
+            cards.appendChild(dayofweek);
+
             console.log(p4);
+
             container.appendChild(cards);
+            if (i === 0) {
+              cards.className = "todayforcast";
+            }
           }
         });
       // add icons and units
