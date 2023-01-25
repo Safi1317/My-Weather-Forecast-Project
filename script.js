@@ -4,6 +4,7 @@ const cityName = document.getElementById("cityName");
 var temperature = document.getElementById("temperature");
 var wind = document.getElementById("wind");
 var humidityEL = document.getElementById("humidity");
+const today = document.getElementById("todayforcast");
 const container = document.getElementById("forcastcontainer");
 const removeChilds = (parent) => {
   while (parent.lastChild) {
@@ -36,11 +37,13 @@ function searchWeather() {
           for (i = 0; i < 5; i++) {
             let cards = document.createElement("div");
             cards.className = "qwert";
+            cards.firstChild.className = "today";
             let p1 = document.createElement("p");
             let p2 = document.createElement("p");
             let p3 = document.createElement("p");
             let p4 = document.createElement("p");
             let h2 = document.createElement("h2");
+
             const d = dayjs();
 
             h2.textContent = d.format("MM/DD/YYYY");

@@ -8,12 +8,15 @@
     <title>Weather Forcast</title>
   </head>
   <body>
-    <div id="searchwrapper">
-      <input id="search" class="inputvalue" placeholder="City name" />
-      <button id="searchbtn" class="searchbtn">Search</button>
-    </div>
-    <div id="weathercontainer">
-      <div class="hide" id="forcastcontainer"></div>
+    <div id="pagewrapper">
+      <div>
+        <input id="search" class="inputvalue" placeholder="City name" />
+        <button id="searchbtn" class="searchbtn">Search</button>
+      </div>
+      <div id="weathercontainer">
+        <div id="todayforcast"></div>
+        <div id="forcastcontainer"></div>
+      </div>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
