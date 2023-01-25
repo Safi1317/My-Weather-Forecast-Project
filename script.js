@@ -5,14 +5,19 @@ var temperature = document.getElementById("temperature");
 var wind = document.getElementById("wind");
 var humidityEL = document.getElementById("humidity");
 const container = document.getElementById("forcastcontainer");
+const removeChilds = (parent) => {
+  while (parent.lastChild) {
+    parent.removeChild(parent.lastChild);
+  }
+};
 var search;
 // var units = metrics;
-var { lat } = location;
-var { lon } = location;
+// var { lat } = location;
+// var { lon } = location;
 function searchWeather() {
   search = document.getElementById("search").value;
   fetch(
-    `https://api.openweathermap.org/geo/1.0/direct?q=${search},&appid=${apiKey}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${search}&appid=${apiKey}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -27,6 +32,7 @@ function searchWeather() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          removeChilds(container);
           for (i = 0; i < 5; i++) {
             let cards = document.createElement("div");
             cards.className = "qwert";
@@ -36,18 +42,16 @@ function searchWeather() {
             let h2 = document.createElement("h2");
             const d = dayjs();
             h2.textContent = d.format("MM/DD/YYYY");
-            p1.textContent = "Temp: " + data["daily"][i]["temp"]["day"];
-            p2.textContent = "Wind: " + data["daily"][i]["wind_speed"];
+            p1.textContent = "Temp: " + data["daily"][i]["temp"]["day"] + "° F";
+            p2.textContent = "Wind: " + data["daily"][i]["wind_speed"] + "MPH";
             p3.textContent = "Humidity: " + data["daily"][i]["humidity"] + "%";
             cards.appendChild(h2);
             cards.appendChild(p1);
             cards.appendChild(p2);
             cards.appendChild(p3);
-
             container.appendChild(cards);
           }
         });
-
       // add icons and units
       // localstorage to save searches
       // city name
