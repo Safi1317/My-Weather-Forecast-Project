@@ -4,6 +4,7 @@
   align-items: center;
   border-radius: 2px;
   padding: 15px;
+  font-size: 0px;
 }
 .searchbtn {
   border-radius: 8px;
@@ -17,20 +18,36 @@
   cursor: pointer;
 }
 
-#weathercontainer {
+/* #weathercontainer {
   width: auto;
   height: auto;
   border: 5px;
-  border-radius: 10px;
-}
+  border-radius: 10px; */
 
-#forcastcontainer {
-  /* display: grid;
-  grid-template-columns: auto;
-  column-gap: 40px; */
-  float: left;
-  width: auto;
-  height: auto;
-  border-radius: 5px;
+.qwert {
+  background-color: rgb(75, 75, 121);
+  margin: 10px;
+  padding: 10px;
+  width: 180px;
+  height: 200px;
+  border: 5px;
   border-radius: 10px;
 }
+#forcastcontainer {
+  display: flex;
+  flex-direction: row;
+}
+#dayscontainer {
+  border: 5px;
+  border-radius: 10px;
+  /* flex-direction: column;
+  column-gap: 40px; */
+  background-color: rgb(75, 75, 121);
+  margin: 10px;
+  padding: 10px;
+  width: 180px;
+  height: 200px;
+}
+/* .hide {
+  display: none;
+} */

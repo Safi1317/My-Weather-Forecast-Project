@@ -6,6 +6,7 @@ var wind = document.getElementById("wind");
 var humidityEL = document.getElementById("humidity");
 const container = document.getElementById("forcastcontainer");
 var search;
+// var units = metrics;
 var { lat } = location;
 var { lon } = location;
 function searchWeather() {
@@ -21,29 +22,35 @@ function searchWeather() {
       console.log(lat);
       console.log(lon);
       fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,&appid=${apiKey}`
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
       )
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
           for (i = 0; i < 5; i++) {
             let cards = document.createElement("div");
+            cards.className = "qwert";
             let p1 = document.createElement("p");
             let p2 = document.createElement("p");
             let p3 = document.createElement("p");
+            let h2 = document.createElement("h2");
+            const d = dayjs();
+            h2.textContent = d.format("MM/DD/YYYY");
             p1.textContent = "Temp: " + data["daily"][i]["temp"]["day"];
             p2.textContent = "Wind: " + data["daily"][i]["wind_speed"];
             p3.textContent = "Humidity: " + data["daily"][i]["humidity"] + "%";
+            cards.appendChild(h2);
             cards.appendChild(p1);
             cards.appendChild(p2);
             cards.appendChild(p3);
+
             container.appendChild(cards);
           }
         });
 
-      //   for (i = 0; i < 5; i++) {
-      //     data.current.temperature;}
-      // });
+      // add icons and units
+      // localstorage to save searches
+      // city name
     });
 }
 searchbtn.addEventListener("click", searchWeather);
