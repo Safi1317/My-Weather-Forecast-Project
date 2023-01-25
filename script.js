@@ -27,7 +27,7 @@ function searchWeather() {
       console.log(lat);
       console.log(lon);
       fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -39,20 +39,29 @@ function searchWeather() {
             let p1 = document.createElement("p");
             let p2 = document.createElement("p");
             let p3 = document.createElement("p");
+            let p4 = document.createElement("p");
             let h2 = document.createElement("h2");
             const d = dayjs();
+
             h2.textContent = d.format("MM/DD/YYYY");
             p1.textContent = "Temp: " + data["daily"][i]["temp"]["day"] + "° F";
             p2.textContent = "Wind: " + data["daily"][i]["wind_speed"] + "MPH";
             p3.textContent = "Humidity: " + data["daily"][i]["humidity"] + "%";
+            var iconUrl = `http://openweathermap.org/img/wn/${data["daily"][i]["weather"][0]["icon"]}@2x.png`;
+            var image = document.createElement("img");
+            image.src = iconUrl;
+            cards.appendChild(image);
             cards.appendChild(h2);
             cards.appendChild(p1);
             cards.appendChild(p2);
             cards.appendChild(p3);
+            cards.appendChild(p4);
+            console.log(p4);
             container.appendChild(cards);
           }
         });
       // add icons and units
+      //timeloop
       // localstorage to save searches
       // city name
     });
