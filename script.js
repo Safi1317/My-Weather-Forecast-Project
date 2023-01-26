@@ -8,11 +8,21 @@ const removeChilds = (parent) => {
     parent.removeChild(parent.lastChild);
   }
 };
-var inputarray = [];
+// var inputarray = [];
 var search;
 function searchWeather(event) {
   event.preventDefault();
   search = document.getElementById("search").value;
+  //push to local storage or if there's nothing in it create a new array
+  if (localStorage.getItem("city name") === null) {
+    var inputarray = [];
+    inputarray.push(search);
+    localStorage.setItem("city name", JSON.stringify(inputarray));
+  } else {
+    var inputarray = JSON.parse(localStorage.getItem("city name"));
+    inputarray.push(search);
+    localStorage.setItem("city name", JSON.stringify(inputarray));
+  }
   fetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${search}&appid=${apiKey}`
   )
@@ -24,6 +34,8 @@ function searchWeather(event) {
       // var userinput = cityName.textContent;
       // localStorage.setItem("city name", search);
       // var userinput = localStorage.getItem("city name");
+
+      //push to local storage or if there's nothing in it create a new array
 
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
@@ -62,11 +74,28 @@ function searchWeather(event) {
             if (i === 0) {
               cards.className = "todayforcast";
             }
-            localStorage.setItem("city name", search);
-            var userinput = localStorage.getItem("city name");
-            console.log(userinput);
-            savesearch.textContent = userinput;
           }
+          // localStorage.setItem("city name", userinput);
+          // var userinput = cityName.textContent;
+          // localStorage.getItem("city name");
+          // cityName.textContent
+          // inputarray.push(userinput);
+
+          // localStorage.setItem("city name", search);
+          // var userinput = localStorage.getItem("city name");
+          // console.log(userinput);
+          // var userinput = cityName.textContent;
+          // inputarray.push(userinput);
+          // savesearch.textContent = userinput;
+          // const myJSON = JSON.stringify(inputarray);
+          // // for (var i = 0; i < inputarray.length; i++) {
+          // localStorage.setItem("city name", myJSON);
+
+          // console.log(inputarray);
+
+          // let text = localStorage.getItem("city name");
+          // let = JSON.parse(text);
+          savesearch.textContent = inputarray;
         });
     });
 }
