@@ -8,16 +8,23 @@
     <title>Weather Forcast</title>
   </head>
   <body>
-    <div id="pagewrapper">
-      <div>
-        <input id="search" class="inputvalue" placeholder="City name" />
-        <button id="searchbtn" class="searchbtn">Search</button>
-      </div>
+    <header>Weather Dashboard</header>
+    <form id="searchwrapper">
+      <h1>Search for a city</h1>
+      <input
+        id="search"
+        class="inputvalue"
+        placeholder="City name"
+        autocomplete="off"
+      />
+      <button id="searchbtn" class="searchbtn">Search</button>
+    </form>
+    <center>
       <div id="weathercontainer">
         <div id="cityName"></div>
         <div id="forcastcontainer"></div>
       </div>
-    </div>
+    </center>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

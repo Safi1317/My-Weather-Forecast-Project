@@ -7,8 +7,10 @@ const removeChilds = (parent) => {
     parent.removeChild(parent.lastChild);
   }
 };
+var Array = [];
 var search;
-function searchWeather() {
+function searchWeather(event) {
+  event.preventDefault();
   search = document.getElementById("search").value;
   fetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${search}&appid=${apiKey}`
@@ -18,6 +20,9 @@ function searchWeather() {
       let lat = data[0].lat;
       let lon = data[0].lon;
       cityName.textContent = data[0]["name"] + " , " + data[0]["country"];
+      // var userinput = cityName.textContent;
+      // localStorage.setItem(cityName,userinput,JSON.stringify());
+      // localStorage.getItem("cityName",JSON);
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
       )
@@ -25,6 +30,10 @@ function searchWeather() {
         .then((data) => {
           removeChilds(container);
           for (i = 0; i < 6; i++) {
+            var userinput = cityName.value;
+            Array.push(userinput);
+            console.log(Array);
+            localStorage.setItem(Array[i], userinput);
             let cards = document.createElement("div");
             cards.className = "qwert";
             let date = document.createElement("h2");
@@ -53,9 +62,9 @@ function searchWeather() {
             }
           }
         });
-
-      // add city name to local storage
-      //style
     });
 }
+
 searchbtn.addEventListener("click", searchWeather);
+// add city name to local storage
+//style
