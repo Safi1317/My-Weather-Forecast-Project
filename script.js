@@ -65,7 +65,7 @@ function searchWeather(event) {
             localStorage.setItem("city name", search);
             var userinput = localStorage.getItem("city name");
             console.log(userinput);
-            savesearch.textContent += userinput;
+            savesearch.textContent = userinput;
           }
         });
     });
