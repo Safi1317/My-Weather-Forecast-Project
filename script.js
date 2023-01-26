@@ -2,12 +2,13 @@ let apiKey = "be1b5ded40845e0479d01eedd998ce1e";
 const searchbtn = document.getElementById("searchbtn");
 const cityName = document.getElementById("cityName");
 const container = document.getElementById("forcastcontainer");
+const savesearch = document.getElementById("savesearch");
 const removeChilds = (parent) => {
   while (parent.lastChild) {
     parent.removeChild(parent.lastChild);
   }
 };
-var Array = [];
+var inputarray = [];
 var search;
 function searchWeather(event) {
   event.preventDefault();
@@ -21,8 +22,9 @@ function searchWeather(event) {
       let lon = data[0].lon;
       cityName.textContent = data[0]["name"] + " , " + data[0]["country"];
       // var userinput = cityName.textContent;
-      // localStorage.setItem(cityName,userinput,JSON.stringify());
-      // localStorage.getItem("cityName",JSON);
+      // localStorage.setItem("city name", search);
+      // var userinput = localStorage.getItem("city name");
+
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
       )
@@ -30,10 +32,10 @@ function searchWeather(event) {
         .then((data) => {
           removeChilds(container);
           for (i = 0; i < 6; i++) {
-            var userinput = cityName.value;
-            Array.push(userinput);
-            console.log(Array);
-            localStorage.setItem(Array[i], userinput);
+            // var userinput = cityName;
+            // Array.push(userinput);
+            // // console.log(Array);
+            // localStorage.setItem(Array[i], userinput);
             let cards = document.createElement("div");
             cards.className = "qwert";
             let date = document.createElement("h2");
@@ -60,6 +62,10 @@ function searchWeather(event) {
             if (i === 0) {
               cards.className = "todayforcast";
             }
+            localStorage.setItem("city name", search);
+            var userinput = localStorage.getItem("city name");
+            console.log(userinput);
+            savesearch.textContent += userinput;
           }
         });
     });
