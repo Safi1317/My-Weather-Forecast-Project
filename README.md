@@ -8,7 +8,7 @@ https://safi1317.github.io/My-Weather-Forecast-Project/
 
 # Screenshot
 
-![screenshot of Portfolio]()
+![screenshot of Portfolio](.\asset\weatherimage.png)
 
 # installation
 
