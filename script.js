@@ -8,21 +8,32 @@ const removeChilds = (parent) => {
     parent.removeChild(parent.lastChild);
   }
 };
+var inputarray = [];
+var search = document.getElementById("search");
+function searchWeather(search) {
+  // event.preventDefault();
+  // search = document.getElementById("search").value;
+  if (localStorage.getItem("inputarray") === null) {
+    inputarray = [];
+    if (inputarray.indexOf(search) !== -1) {
+      localStorage.setItem("inputarray", JSON.stringify(inputarray));
+    } else {
+      inputarray.push(search);
+      localStorage.setItem("inputarray", JSON.stringify(inputarray));
+    }
+  } else {
+    inputarray = JSON.parse(localStorage.getItem("inputarray"));
+    if (inputarray.indexOf(search) !== -1) {
+      localStorage.setItem("inputarray", JSON.stringify(inputarray));
+    } else {
+      inputarray.push(search);
+      localStorage.setItem("inputarray", JSON.stringify(inputarray));
+    }
+  }
 
-var search;
-function searchWeather(event) {
-  event.preventDefault();
-  search = document.getElementById("search").value;
-
-  // if (localStorage.getItem("city name") === null) {
-  //   var inputarray = [];
-  //   inputarray.push(search);
-  //   localStorage.setItem("city name", JSON.stringify(inputarray));
-  // } else {
-  //   var inputarray = JSON.parse(localStorage.getItem("city name"));
-  //   inputarray.push(search);
-  //   localStorage.setItem("city name", JSON.stringify(inputarray));
-  // }
+  //get from local storage
+  var inputarray = JSON.parse(localStorage.getItem("inputarray"));
+  console.log(inputarray);
   fetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${search}&appid=${apiKey}`
   )
@@ -42,13 +53,14 @@ function searchWeather(event) {
             cards.className = "qwert";
             let date = document.createElement("h2");
             let p1 = document.createElement("p");
+            // let p1=$("<p>")
             let p2 = document.createElement("p");
             let p3 = document.createElement("p");
-            let p4 = document.createElement("p");
             const today = data["daily"][i]["dt"];
             let dayofweek = dayjs.unix(today);
             date.textContent = dayofweek.format("DD/MM/YYYY");
             p1.textContent = "Temp: " + data["daily"][i]["temp"]["day"] + "° F";
+            // Jp1.text("Temp: " + data["daily"][i]["temp"]["day"] + "° F")
             p2.textContent = "Wind: " + data["daily"][i]["wind_speed"] + "MPH";
             p3.textContent = "Humidity: " + data["daily"][i]["humidity"] + "%";
             var iconUrl = `http://openweathermap.org/img/wn/${data["daily"][i]["weather"][0]["icon"]}@2x.png`;
@@ -59,28 +71,61 @@ function searchWeather(event) {
             cards.appendChild(p1);
             cards.appendChild(p2);
             cards.appendChild(p3);
-            cards.appendChild(p4);
             container.appendChild(cards);
             if (i === 0) {
               cards.className = "todayforcast";
             }
           }
-          var userinput = cityName.textContent;
-          if (localStorage.getItem("city name") === null) {
-            var inputarray = [];
-            inputarray.push(userinput);
-            localStorage.setItem("city name", JSON.stringify(userinput));
-          } else {
-            var citysearch = JSON.parse(localStorage.getItem("citysearch"));
-            inputarray.push(userinput);
-            localStorage.setItem("city name", JSON.stringify(userinput));
+          console.log(inputarray[0]);
+          savesearch.innerHTML = "";
+          for (i = 0; i < inputarray.length; i++) {
+            let btn = document.createElement("button");
+            btn.setAttribute("class", "history-btn");
+            btn.setAttribute("id", inputarray[i]);
+            btn.textContent = inputarray[i];
+            savesearch.append(btn);
           }
-          savesearch.textContent = userinput;
+
+          // savesearch.textContent = search;
         });
     });
 }
-
-searchbtn.addEventListener("click", searchWeather);
+function handlesearchform(event) {
+  if (!search.value) {
+    return;
+  }
+  event.preventDefault();
+  var city = search.value.trim();
+  searchWeather(city);
+  search.value = "";
+}
+function handlesearchbutton(event) {
+  if (!event.target.matches(".history-btn")) {
+    return;
+  }
+  var btn = event.target;
+  var city = btn.getAttribute("id");
+  searchWeather(city);
+}
+function displayhistory() {
+  var searchhistory = localStorage.getItem("inputarray");
+  if (searchhistory) {
+    inputarray = JSON.parse(searchhistory);
+  } else {
+    inputarray = [];
+  }
+  savesearch.innerHTML = "";
+  for (i = 0; i < inputarray.length; i++) {
+    let btn = document.createElement("button");
+    btn.setAttribute("class", "history-btn");
+    btn.setAttribute("id", inputarray[i]);
+    btn.textContent = inputarray[i];
+    savesearch.append(btn);
+  }
+}
+displayhistory();
+savesearch.addEventListener("click", handlesearchbutton);
+searchbtn.addEventListener("click", handlesearchform);
 // make info in local storage searchable again
 //make city name appear within first card
 //style

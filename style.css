@@ -13,6 +13,17 @@ header {
   margin: auto;
   font-size: 30px;
 }
+.history-btn {
+  width: 20%;
+  padding: 10px;
+  background-color: rgb(205, 127, 38);
+  color: white;
+  font-size: 17px;
+  border: 1px solid rgb(205, 127, 38);
+  border-left: none;
+  cursor: pointer;
+  display: grid;
+}
 
 #search {
   padding: 10px;
@@ -69,3 +80,7 @@ header {
   flex-direction: row;
   /* flex-wrap: wrap; */
 }
+/* #weathercontainer {
+  display: flex;
+  flex-direction: column;
+} */
